@@ -2,11 +2,12 @@
 import { notFound } from "next/navigation";
 import { moviesApi } from "@/services/tmdbClient";
 import { Metadata } from "next";
+import { movieSources } from "@/app/utils/sources";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { id: number };
 }): Promise<Metadata> {
   const { id } = await params;
   const movie = await moviesApi.getById(id).catch(() => null);
@@ -22,25 +23,24 @@ export async function generateMetadata({
   };
 }
 
-export default async function Watch({ params }: { params: { id: string } }) {
-  const { id } = await params;
+export default async function Watch({
+  params,
+}: {
+  params: { id: number; src: number };
+}) {
+  const { id, src } = await params;
   const movie = await moviesApi.getById(id).catch(() => null);
-
-  const embedUrl = `https://embed.su/embed/movie/${id}`;
+  const source = movieSources[src].url;
   if (!movie) notFound();
-
+  const videoUrl = `${process.env.MOVIE_SOURCE}/${id}`;
   return (
-    <div className="w-full fixed top-0 bottom-0 right-0 left-0 z-50  min-h-screen h-full bg-[#0F0F0F] flex flex-col">
-      {/* Hero Section */}
-      <div className="h-screen">
+    <div className="w-full fixed  flex-col top-0 bottom-0 right-0 left-0 z-50  min-h-screen h-full bg-[#000000] flex">
+      {src}
+      <div className="h-full">
         <iframe
-          // src={`https://vidlink.pro/movie/${id}?player=default&autoplay=1&volume=100&mute=0`}
-          src={`https://embed.su/embed/movie/${id}`}
-          // src={`/api/proxy?url=${encodeURIComponent(embedUrl)}`}
+          src={`${source}/${id}`}
           className="w-full h-full"
-          allow="autoplay; fullscreen"
-          frameBorder={0}
-          scrolling="no"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
       </div>

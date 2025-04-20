@@ -1,61 +1,81 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFilm, FaHome, FaInfoCircle, FaSearch } from "react-icons/fa";
-import { CiCircleInfo } from "react-icons/ci";
-import { FaTv } from "react-icons/fa6";
+import { IoIosInformationCircle } from "react-icons/io";
+import { SidebarPaths } from "@/app/lib/SidebarPaths";
 import clsx from "clsx";
-import path from "path";
 
 const Sidebar = () => {
   const pathname = usePathname();
+
+  const linkStyle = `
+  flex 
+  items-center 
+  justify-center
+  text-slate-400
+  font-medium 
+  text-2xl
+
+  rounded-3xl
+  flex-row 
+  gap-3  
+  transition-all 
+  font-sans
+  tracking-wide
+  duration-300 
+  h-10
+  w-10
+  ease-in-out
+  
+  outline-none
+  ring-0
+
+  `;
+
+  const paths = SidebarPaths;
   return (
-    <div className="fixed hidden  w-14 py-4 transition-all shadow-2xl duration-200 bg-[#141313] top-0 left-0 bottom-0 z-50 md:lg:flex flex-col items-center p-2 ">
-      <div className="mt-4 flex flex-col gap-2 h-full">
-        <Link
-          href={"/"}
+    <div className="fixed hidden md:lg:flex bg-[#080e15]/20   w-[4rem] py-4 transition-all duration-200   top-0 left-0 bottom-0 z-50   flex-col items-center p-2 ">
+      <div className=" flex flex-col space-y-2 h-full w-full">
+        <p
           className={clsx(
-            pathname === "/" ? "bg-gray-800 shadow-2xl" : "bg-none",
-            "flex items-center text-gray-300 justify-center hover:bg-gray-800  p-2.5 rounded-sm   transition-all duration-200 ease-in-out "
+            "text-lg text-slate-200 font-sans font-medium text-center mb-4"
+          )}
+        ></p>
+
+        <br />
+
+        {paths && (
+          <div className="flex flex-col gap-2">
+            {paths.map(({ name, path, icon: Icon }, index) => (
+              <Link
+                href={path}
+                key={index}
+                title={name}
+                className={clsx(
+                  linkStyle,
+                  pathname === path
+                    ? "text-white  bg-[#1c2430]/60 shadow-2xl"
+                    : "bg-none"
+                )}
+              >
+                <Icon />
+              </Link>
+            ))}
+          </div>
+        )}
+
+        <Link
+          href="/info"
+          title="Info"
+          className={clsx(
+            linkStyle,
+            pathname === "/info"
+              ? "text-white bg-blue-400  shadow-2xl"
+              : "bg-none",
+            "mt-auto"
           )}
         >
-          <FaHome className="text-xl" />
-        </Link>
-        <Link
-          href={"/movie"}
-          className={clsx(
-            pathname === "/movie" ? "bg-gray-800 shadow-2xl" : "bg-none",
-            "flex items-center text-gray-300 justify-center hover:bg-gray-800  p-2.5 rounded-sm   transition-all duration-200 ease-in-out "
-          )}
-        >
-          <FaFilm className="text-xl" />
-        </Link>
-        <Link
-          href={"/tv"}
-          className={clsx(
-            pathname === "/tv" ? "bg-gray-800 shadow-2xl" : "bg-none",
-            "flex items-center text-gray-300 justify-center hover:bg-gray-800  p-2.5 rounded-sm   transition-all duration-200 ease-in-out "
-          )}
-        >
-          <FaTv className="text-xl" />
-        </Link>
-        <Link
-          href={"/search"}
-          className={clsx(
-            pathname === "/search" ? "bg-gray-800 shadow-2xl" : "bg-none",
-            "flex items-center text-gray-300 justify-center hover:bg-gray-800  p-2.5 rounded-sm   transition-all duration-200 ease-in-out "
-          )}
-        >
-          <FaSearch className="text-xl" />
-        </Link>
-        <Link
-          href={"/info"}
-          className={clsx(
-            pathname === "/search" ? "bg-gray-800 shadow-2xl" : "bg-none",
-            "flex items-center mt-auto text-gray-300 justify-center hover:bg-gray-800  p-2.5 rounded-sm   transition-all duration-200 ease-in-out "
-          )}
-        >
-          <FaInfoCircle className="text-xl " />
+          <IoIosInformationCircle className="font-bold" />
         </Link>
       </div>
     </div>

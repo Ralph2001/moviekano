@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { moviesApi } from '../../../services/tmdbClient'
+import { moviesApi, tvApi } from '../../../services/tmdbClient'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { tmdb } = req.query
@@ -12,15 +12,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 const popularData = await moviesApi.getPopular(Number(page))
                 console.log('data', popularData)
                 return res.status(200).json(popularData)
-            case 'top-rated':
-                const topRatedData = await moviesApi.getTopRated(Number(page))
-                console.log('data', topRatedData)
-                return res.status(200).json(topRatedData)
-            case 'now-playing':
-                const nowPlayingData = await moviesApi.nowPlaying(Number(page))
-                console.log('data', nowPlayingData)
-                return res.status(200).json(nowPlayingData)
-
+            case 'similar':
+                const similarData = await tvApi.getSimilarTvShow(Number(page))
+                console.log('data', similarData)
+                return res.status(200).json(similarData)
 
             default:
                 if (path?.startsWith('movie/')) {
