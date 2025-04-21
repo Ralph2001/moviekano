@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SeasonEpisodes from "./SeasonEpisodes";
 import BackButton from "./BackButton";
 import SeasonSelector from "./tv/SeasonSelector";
@@ -14,6 +14,8 @@ import TvOverview from "./tabs/TvOverview";
 import { Anton } from "next/font/google";
 import { FaCloud } from "react-icons/fa";
 import { useSimilarTvShow } from "@/hooks/useTvShows";
+import { useRouter } from "next/navigation";
+import slugify from "react-slugify";
 
 interface Props {
   tvId: number;
@@ -44,6 +46,7 @@ export default function TvPlayerWithSeasons({
   const [currentServer, setCurrentServer] = useState<string>(
     "https://vidlink.pro/tv"
   );
+  const router = useRouter();
 
   const [isCurrentPlaying, setIsCurrentPlaying] = useState(false);
 
@@ -57,6 +60,8 @@ export default function TvPlayerWithSeasons({
     }
   }
 
+  const playerRef = useRef<HTMLDivElement>(null);
+
   // Central function to handle playing an episode
   const playEpisode = (ep: TMDBTypes.TVEpisodes, serverOverride?: string) => {
     const seasonNumber = ep.season_number;
@@ -66,6 +71,8 @@ export default function TvPlayerWithSeasons({
     setCurrentEpisodeNumber(episodeNumber);
     setCurrentEpisode(ep.name);
     setIsCurrentPlaying(true);
+
+    playerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
 
     const server = serverOverride || currentServer;
     const url = `${server}/${tvId}/${seasonNumber}/${episodeNumber}`;
@@ -191,7 +198,9 @@ export default function TvPlayerWithSeasons({
                     <IoTimeOutline /> {ep.runtime}m
                   </p>
                   <p className="text-xs text-gray-400 text-start mt-auto">
-                    {formatDate(ep.air_date, "MMMM dd, yyyy")}
+                    {ep.air_date && (
+                      <span> {formatDate(ep.air_date, "MMMM dd, yyyy")}</span>
+                    )}
                   </p>
                 </div>
               </button>
@@ -211,7 +220,7 @@ export default function TvPlayerWithSeasons({
           {similar?.map((related) => (
             <button
               key={related.id}
-              onClick={() => {}}
+              onClick={() => goToRelated(related)}
               className={clsx(
                 "h-24 w-full flex group hover:bg-gray-900 transition-all rounded duration-300 cursor-pointer overflow-hidden"
               )}
@@ -231,7 +240,7 @@ export default function TvPlayerWithSeasons({
                   src={
                     related.poster_path
                       ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/w500${related.poster_path}`
-                      : "/default-movie.jpg"
+                      : "/default.png"
                   }
                 />
                 {/* <p className="absolute bottom-1 left-1 font-bold text-white">
@@ -251,7 +260,8 @@ export default function TvPlayerWithSeasons({
                 </p>
                 <p className="text-gray-300 text-xs">
                   <span className="text-gray-400">Released:</span>{" "}
-                  {formatDate(related.first_air_date, "MMMM dd, yyyy")}
+                  {related.first_air_date &&
+                    formatDate(related.first_air_date, "MMMM dd, yyyy")}
                 </p>
                 <p className="text-gray-400 mb-auto mt-auto gap-1 text-xs line-clamp-2 text-justify ">
                   {related.overview}
@@ -264,17 +274,26 @@ export default function TvPlayerWithSeasons({
     },
   ];
 
+  const goToRelated = (related: TMDBTypes.TVSimilar) => {
+    // Navigate to the related TV show page
+    // You can use Next.js router or any other navigation method
+    // For example:
+    const slugifiedTitle = slugify(related.name);
+    const fullSlug = `${slugifiedTitle}-${related.id}`;
+    router.push(`/tv/details/${fullSlug}`);
+  };
+
   return (
     <div className="flex justify-center w-full  h-screen md:pl-[4rem] md:p-4">
       <div className="max-w-screen-2xl w-full h-full max-h-[50rem] grid grid-cols-1 lg:grid-cols-[70%_30%] gap-2">
         {/* Left Column */}
-        <div className="flex flex-col flex-1 min-h-0 overflow-auto gap-4 p-2">
-          <div className="flex flex-row items-center gap-2">
+        <div className="flex flex-col flex-1 gap-4 p-2">
+          <div className="flex flex-row items-center gap-2" ref={playerRef}>
             <BackButton />
             <p
               className={clsx(
                 anton.className,
-                "text-2xl font-bold text-gray-50"
+                " text-base truncate md:text-2xl font-bold text-gray-50"
               )}
             >
               {tv.name}
@@ -294,12 +313,13 @@ export default function TvPlayerWithSeasons({
           )}
 
           {/* Player */}
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 outline-none ">
             {iframeSrc ? (
               <iframe
                 src={iframeSrc}
-                className="w-full h-full rounded-2xl shadow-md min-h-40"
+                className="w-full h-full rounded-2xl shadow-md min-h-40 outline-none ring-0"
                 frameBorder="0"
+                tabIndex={-1}
                 allowFullScreen
               />
             ) : (
@@ -318,10 +338,12 @@ export default function TvPlayerWithSeasons({
                 <div className="absolute inset-0 z-20 justify-center flex flex-col items-center px-4 text-center">
                   <p className="md:text-2xl font-bold text-gray-50 font-mono">
                     {defaultTitle}
-                    <span className="italic">
-                      {" "}
-                      ({formatDate(tv.first_air_date, "yyyy")})
-                    </span>
+
+                    {tv.first_air_date && (
+                      <span className="italic">
+                        ({formatDate(tv.first_air_date, "yyyy")})
+                      </span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -354,7 +376,7 @@ export default function TvPlayerWithSeasons({
         </div>
 
         {/* Right Column (Tabs) */}
-        <div className="bg-black/20 p-4 gap-2 rounded-2xl flex flex-col min-h-0 overflow-hidden">
+        <div className="bg-black/20 h-[calc(100vh-1rem)] lg:h-auto  p-4 gap-2 rounded-2xl flex flex-col min-h-0 overflow-hidden">
           <Tabs tabs={tabData} />
         </div>
       </div>

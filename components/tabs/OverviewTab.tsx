@@ -28,7 +28,7 @@ export default function OverviewTab({ movie }: { movie: any }) {
         </div>
 
         {/* Meta Info */}
-        <div className="p-5 rounded-2xl grid grid-cols-2 md:lg:grid-cols-4 gap-2">
+        <div className="p-5 rounded-2xl grid grid-cols-2 gap-2">
           {[
             {
               label: "Release Date",
@@ -72,7 +72,7 @@ export default function OverviewTab({ movie }: { movie: any }) {
           <RiBuilding2Line className="text-md text-blue-400" /> Production
           Companies
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 px-5">
+        <div className="grid grid-cols-1 gap-2 px-5">
           {movie.production_companies.map((prod: any, i: number) => (
             <div
               key={i}
