@@ -169,7 +169,7 @@ export default function TvPlayerWithSeasons({
                     src={
                       ep.still_path
                         ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/w500${ep.still_path}`
-                        : "/default-movie.jpg"
+                        : "/default.png"
                     }
                   />
                   <p className="absolute bottom-1 left-1 font-bold text-white">

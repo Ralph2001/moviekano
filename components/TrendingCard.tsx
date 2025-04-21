@@ -66,7 +66,11 @@ export const TrendingCard = ({ media }: TrendingCardProps) => {
           </p>
         </div>
         <Image
-          src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/w500${media.poster_path}`}
+          src={
+            media.poster_path
+              ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/w500${media.poster_path}`
+              : "/default.png"
+          }
           alt={media.title ? media.title : media.name ? media.name : ""}
           fill
           quality={50}

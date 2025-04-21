@@ -39,7 +39,12 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
       {/* Image Container */}
       <div className="relative overflow-hidden w-full  rounded-2xl h-[15rem] transition-all duration-200 ease-in-out">
         <Image
-          src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/w500${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/w500${movie.poster_path}`
+              : "/default.png"
+          }
+          
           alt={movie.title}
           fill
           quality={50}

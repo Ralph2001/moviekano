@@ -7,7 +7,7 @@ interface Props {
   title: string;
 }
 
-const fallbackImage = "/fallback.png";
+const fallbackImage = "/default.png";
 
 const ContentCard = ({ posterPath, title }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
