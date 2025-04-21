@@ -6,13 +6,17 @@ import { Metadata } from "next";
 import { movieSources, tvSources } from "@/app/utils/sources";
 import { unSlug } from "@/app/utils";
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 // Accept either 3 or 5 slug segments
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string[] };
-}): Promise<Metadata> {
-  const slug = params.slug;
+}: PageProps): Promise<Metadata> {
+  // const slug = await slug;
+  const { slug } = await params;
+
   if (!slug || (slug.length !== 3 && slug.length !== 5)) notFound();
 
   return {
@@ -21,13 +25,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Watch({
-  params,
-}: {
-  params: Promise<{ slug: string[] }>;
-}) {
+export default async function Watch({ params }: PageProps) {
   const { slug } = await params;
-
   // const [type, sourceIndexRaw, idRaw, seasonId, epId] = slug;
   const type = slug[0];
   const sourceIndexRaw = slug[1];

@@ -18,11 +18,11 @@ import ContentCard from "@/components/ContentCard";
 import OverviewTab from "@/components/tabs/OverviewTab";
 import SelectSource from "@/components/SelectSource";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const id = unSlug(slug);
   const movie = await moviesApi.getById(Number(id)).catch(() => null);
@@ -38,11 +38,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function MovieDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function MovieDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const id = unSlug(slug);
 

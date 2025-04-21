@@ -5,18 +5,20 @@ import { tvApi } from "@/services/tmdbClient";
 import { unSlug } from "@/app/utils";
 import TvPlayerWithSeasons from "@/components/TvPlayerWithSeasons";
 
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = await params;
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params; // await because params is a Promise
   const id = unSlug(slug);
 
   const [tv] = await Promise.all([tvApi.getById(Number(id)).catch(() => null)]);
 
   return {
-    title: tv?.name || "Movie Details",
+    title: tv?.name || "TV Details",
     description: tv ? `${tv.overview?.slice(0, 150)}...` : "",
     openGraph: {
       images: tv?.poster_path
@@ -26,18 +28,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function MovieDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = await params;
+export default async function TVDetailPage({ params }: PageProps) {
+  const { slug } = await params; // again, await it!
   const id = unSlug(slug);
 
   const [tv, similar] = await Promise.all([
     tvApi.getById(Number(id)).catch(() => null),
     tvApi.getSimilarTvShow(Number(id)).catch(() => []),
   ]);
+
   if (!tv) notFound();
 
   return (
