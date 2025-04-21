@@ -22,6 +22,11 @@ tmdbClient.interceptors.response.use(
     }
 )
 
+
+
+
+
+
 export const moviesApi = {
     getById: async (id: number) => {
         const { data } = await tmdbClient.get<TMDBTypes.Movie>(`/movie/${id}`)
