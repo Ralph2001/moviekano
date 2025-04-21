@@ -30,24 +30,24 @@ const Tabs: React.FC<TabsProps> = ({ tabs }) => {
 
   // Handle swipe gestures
   const handleTouchStart = (e: React.TouchEvent) => {
-    const touchStart = e.touches[0].clientX;
-    startTouchRef.current = touchStart;
+    // const touchStart = e.touches[0].clientX;
+    // startTouchRef.current = touchStart;
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchEnd = e.changedTouches[0].clientX;
-    const touchDifference = startTouchRef.current - touchEnd;
+    // const touchEnd = e.changedTouches[0].clientX;
+    // const touchDifference = startTouchRef.current - touchEnd;
 
-    // Swipe left (to change to next tab)
-    if (touchDifference > 50) {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % tabs.length);
-    }
-    // Swipe right (to change to previous tab)
-    else if (touchDifference < -50) {
-      setActiveIndex((prevIndex) =>
-        prevIndex === 0 ? tabs.length - 1 : prevIndex - 1
-      );
-    }
+    // // Swipe left (to change to next tab)
+    // if (touchDifference > 50) {
+    //   setActiveIndex((prevIndex) => (prevIndex + 1) % tabs.length);
+    // }
+    // // Swipe right (to change to previous tab)
+    // else if (touchDifference < -50) {
+    //   setActiveIndex((prevIndex) =>
+    //     prevIndex === 0 ? tabs.length - 1 : prevIndex - 1
+    //   );
+    // }
   };
 
   return (
