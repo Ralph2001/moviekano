@@ -132,7 +132,7 @@ const Page = () => {
 
         {loading && <p className="text-white">Loading...</p>}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:lg:px-10 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 md:lg:px-10 mt-4">
           {results.map((item, index) => (
             <SearchCard
               media={item}
