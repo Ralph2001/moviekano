@@ -18,9 +18,9 @@ export default function TvOverview({ tv }: { tv: TMDBTypes.TV }) {
           <p className="text-xl mb-4 font-bold flex items-center gap-2 text-gray-300">
             <GrOverview className="text-blue-400" /> Overview
           </p>
-          <div className="px-5">
-            <div className="p-5 bg-[#1D1F23] border border-neutral-800 rounded-2xl ">
-              <p className="text-justify text-sm font-semibold">
+          <div className="">
+            <div className="p-4 bg-[#1D1F23] border border-neutral-800 rounded-2xl ">
+              <p className="text-justify text-sm font-semibold text-gray-50">
                 {tv.overview}
               </p>
             </div>
@@ -42,8 +42,8 @@ export default function TvOverview({ tv }: { tv: TMDBTypes.TV }) {
             { label: "Status", value: tv.status },
           ].map((item, i) => (
             <div className="space-y-1" key={i}>
-              <p className="text-gray-400 text-sm font-medium">{item.label}</p>
-              <p className="text-sm text-gray-200 font-medium">{item.value}</p>
+              <p className="text-gray-500 text-sm font-medium">{item.label}</p>
+              <p className="text-sm text-gray-100 font-medium">{item.value}</p>
             </div>
           ))}
         </div>

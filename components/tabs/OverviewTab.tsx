@@ -6,6 +6,16 @@ import { BiCategory } from "react-icons/bi";
 import { RiBuilding2Line } from "react-icons/ri";
 import Image from "next/image";
 import { formatDate } from "@/app/utils";
+import {
+  Cormorant_Garamond,
+  Libre_Baskerville,
+  Lora,
+  Merriweather,
+  Nunito,
+  Poppins,
+  Rubik,
+} from "next/font/google";
+import clsx from "clsx";
 
 export default function OverviewTab({ movie }: { movie: any }) {
   if (!movie) return null;
@@ -18,9 +28,9 @@ export default function OverviewTab({ movie }: { movie: any }) {
           <p className="text-xl mb-4 font-bold flex items-center gap-2 text-gray-300">
             <GrOverview className="text-blue-400" /> Overview
           </p>
-          <div className="px-5">
-            <div className="p-5 bg-[#1D1F23] border border-neutral-800 rounded-2xl ">
-              <p className="text-balance text-ms font-semibold">
+          <div className="">
+            <div className="p-4 bg-[#1D1F23] border border-neutral-800 rounded-2xl text-gray-50 ">
+              <p className={clsx("text-justify text-sm font-semibold")}>
                 {movie.overview}
               </p>
             </div>
@@ -42,8 +52,8 @@ export default function OverviewTab({ movie }: { movie: any }) {
             { label: "Status", value: movie.status },
           ].map((item, i) => (
             <div className="space-y-1" key={i}>
-              <p className="text-gray-400 text-sm font-medium">{item.label}</p>
-              <p className="text-sm text-gray-200 font-medium">{item.value}</p>
+              <p className="text-gray-500 text-sm font-medium ">{item.label}</p>
+              <p className="text-sm text-gray-100 font-medium ">{item.value}</p>
             </div>
           ))}
         </div>
