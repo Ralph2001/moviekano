@@ -40,7 +40,7 @@ export default async function TVDetailPage({ params }: PageProps) {
   if (!tv) notFound();
 
   return (
-    <div className="min-h-screen flex flex-col w-full ">
+    <div className="min-h-screen flex flex-col w-full  ">
       <TvPlayerWithSeasons
         tvId={id}
         tv={tv}

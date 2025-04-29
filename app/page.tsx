@@ -23,7 +23,7 @@ export default function Home() {
 
   return (
     // md:lg:pl-[3.5rem]
-    <main className="w-full min-h-screen  h-full  flex flex-col items-center ">
+    <main className="w-full min-h-screen pb-10  h-full  flex flex-col items-center ">
       <div className="max-w-screen-2xl  w-full flex  justify-center">
         <TopIntro {...trendingDayMovies} />
       </div>

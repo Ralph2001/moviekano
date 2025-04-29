@@ -66,14 +66,14 @@ const TopIntro: React.FC<MovieListProps> = ({ titles, isLoading, isError }) => {
   );
 
   return (
-    <div className="relative h-[calc(100vh-200px)] md:lg:h-[calc(100vh-250px)] max-h-[50rem] flex flex-row items-center justify-center w-full">
+    <div className="relative h-[calc(100vh-300px)] md:lg:h-[calc(100vh-250px)] max-h-[50rem] flex flex-row items-center justify-center w-full">
       {randomMovie && (
         <>
-          {/* {randomMovie.media_type === "movie" ? <MovieTag /> : <TvTag />} */}
           <Image
             src={`${process.env.NEXT_PUBLIC_TMDB_IMAGE_BASE_URL}/original${randomMovie.backdrop_path}`}
             alt={""}
             fill
+            quality={100}
             className="object-cover opacity-50 "
             priority
           />
@@ -126,7 +126,7 @@ const TopIntro: React.FC<MovieListProps> = ({ titles, isLoading, isError }) => {
                 <div className="flex flex-row gap-2 items-center mt-auto">
                   <button
                     onClick={() => getMovieDetails(randomMovie)}
-                    className="w-30 rounded-lg py-1.5 border-2 flex flex-row items-center cursor-pointer justify-center gap-2 bg-white/10 hover:bg-white/20 border-white"
+                    className="w-30 rounded-lg py-1.5 h-8 flex flex-row items-center cursor-pointer justify-center gap-2 bg-white/10 hover:bg-white/20 "
                   >
                     <IoMdAlert className="text-white" />{" "}
                     <p className="text-white font-medium text-sm">Details</p>

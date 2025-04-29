@@ -103,7 +103,7 @@ export default async function MovieDetailPage({ params }: PageProps) {
     {
       label: "Videos",
       content: (
-        <div className="grid grid-cols-1 md:lg:grid-cols-2 overflow-y-auto no-scrollbar gap-2 w-full justify-center">
+        <div className="grid grid-cols-1 overflow-y-auto no-scrollbar gap-2 w-full justify-center">
           {videos
             ?.filter((vid: any) => vid.site === "YouTube")
             .slice(0, 9)
@@ -113,7 +113,7 @@ export default async function MovieDetailPage({ params }: PageProps) {
                 frameBorder={0}
                 allowFullScreen
                 src={`https://www.youtube.com/embed/${vid.key}`}
-                className="w-full h-42 border border-neutral-800 rounded-2xl flex items-center justify-center text-center text-gray-50"
+                className="w-full h-52 border border-neutral-800 rounded-2xl flex items-center justify-center text-center text-gray-50"
               >
                 {vid.name}
               </iframe>
@@ -141,15 +141,18 @@ export default async function MovieDetailPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="flex justify-center w-full h-screen md:pl-[4rem] md:p-4">
-      <div className="max-w-screen-2xl w-full h-full grid grid-cols-1 lg:grid-cols-[65%_35%] gap-2">
+    <div className="flex justify-center w-full h-screen md:pl-[4rem] md:p-4  no-scrollbar">
+
+      <div className="max-w-screen-2xl max-h-[50rem] w-full h-full grid grid-cols-1 lg:grid-cols-[65%_35%] gap-2">
+      
+      
         {/* Left Column */}
         <div className="flex flex-col flex-1 gap-4 p-2">
           <MoviePlayer movie={movie} />
         </div>
 
         {/* Right Column (Tabs) */}
-        <div className="overflow-auto bg-black/20 p-4 gap-2 rounded-2xl flex flex-col h-[calc(100vh-1rem)] lg:h-auto">
+        <div className="overflow-auto bg-black/20 p-4 gap-2 rounded-2xl flex flex-col  mt-9 pt-12 md:pt-4  h-[calc(100vh-1rem)] lg:h-auto">
           <Tabs tabs={tabData} />
         </div>
       </div>

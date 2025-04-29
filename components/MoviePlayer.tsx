@@ -35,8 +35,8 @@ const MoviePlayer: React.FC<MoviePlayerProps> = ({ movie }) => {
   };
 
   return (
-    <div className="h-full flex flex-col  gap-4">
-      <div className="flex flex-row items-center gap-2 outline-none">
+    <div className="h-full flex flex-col  gap-4 ">
+      <div className="flex fixed top-0 h-12    px-6 bg-[#080E15] right-0 left-0 flex-row z-50 items-center gap-2 outline-none">
         <BackButton />
         <p
           className={clsx(
@@ -44,15 +44,15 @@ const MoviePlayer: React.FC<MoviePlayerProps> = ({ movie }) => {
             "text-base truncate md:text-2xl font-bold text-gray-50"
           )}
         >
-          {movie.title}
+          {movie.title} ({formatDate(movie.release_date, "yyyy")})
         </p>
       </div>
 
-      <div className="flex-1 outline-none">
+      <div className="flex-1 outline-none  mt-9 ">
         {readyToPlay ? (
           <iframe
             src={iframeSrc}
-            className="w-full h-full rounded-2xl shadow-md min-h-40 outline-none"
+            className="w-full h-full rounded-2xl shadow-md min-h-60 outline-none"
             frameBorder="0"
             allowFullScreen
           />
@@ -89,13 +89,13 @@ const MoviePlayer: React.FC<MoviePlayerProps> = ({ movie }) => {
         )}
       </div>
 
-      <div className="w-fit flex md:flex-col gap-2">
+      <div className="w-fit flex flex-col gap-2 ">
         <SourceSelector
           currentServer={server}
           setServer={(newServer) => handleServerChange(newServer)}
         />
         <p className="text-xs text-gray-500 italic">
-          Having trouble loading the episode? Try switching the source.
+          Having trouble loading the movie? Try switching the source.
         </p>
       </div>
     </div>

@@ -70,7 +70,7 @@ const Sidebar = () => {
           className={clsx(
             linkStyle,
             pathname === "/info"
-              ? "text-white bg-blue-400  shadow-2xl"
+              ? "text-white  bg-[#1c2430]/60 shadow-2xl"
               : "bg-none",
             "mt-auto"
           )}

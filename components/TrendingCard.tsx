@@ -54,11 +54,11 @@ export const TrendingCard = ({ media }: TrendingCardProps) => {
         setIsFocus(true);
       }}
       onBlur={() => setIsFocus(false)}
-      className="flex flex-col gap-2 cursor-pointer  rounded-lg group p-2 w-full focus:bg-gray-800 overflow-hidden    transition-all duration-200 h-full   outline-none focus:outline-none ring-0 group"
+      className="flex flex-col gap-2 cursor-pointer  rounded-lg group p-2 w-full focus:bg-gray-800 overflow-hidden     transition-all duration-200  h-[20rem]   outline-none focus:outline-none ring-0 group"
       aria-label={`View details for ${media.title}`}
     >
       {/* Image Container */}
-      <div className="relative overflow-hidden w-full z-50  rounded-lg h-[13rem] md:lg:h-[16rem] transition-all duration-200 ease-in-out">
+      <div className="relative overflow-hidden w-full z-50  rounded-lg h-full transition-all duration-200 ease-in-out">
         <div className="absolute top-2 right-2 z-50 bg-[#D0A007] rounded-full px-1.5 py-0.5 text-gray-900 flex items-center justify-center flex-row gap-0.5">
           <FaStar className="text-xs" />
           <p className="text-xs font-medium">
@@ -94,16 +94,16 @@ export const TrendingCard = ({ media }: TrendingCardProps) => {
           </div>
         )}
       </div>
-      <div className="h-[3rem]    flex flex-col overflow-hidden">
+      <div className="h-auto  p-0.5    flex flex-col overflow-hidden">
         {/* Title */}
         <p
           title={media.title ? media.title : media.name ? media.name : ""}
-          className=" text-base text-gray-50 font-medium truncate"
+          className=" text-xs md:text-sm  text-gray-400 truncate"
         >
           {media.title ? media.title : media.name ? media.name : ""}
         </p>
         {/* Info */}
-        <div className="flex items-center mt-auto text-slate-500 font-medium gap-1 flex-row w-full">
+        {/* <div className="flex items-center mt-auto text-slate-500 font-medium gap-1 flex-row w-full">
           {media.media_type && (
             <div className="rounded text-xs bg-[#060B11] text-white px-1.5 border border-neutral-800">
               {media.media_type === "movie"
@@ -121,7 +121,7 @@ export const TrendingCard = ({ media }: TrendingCardProps) => {
               ? format(new Date(media.first_air_date), "yyyy")
               : ""}
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

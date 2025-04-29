@@ -37,7 +37,7 @@ export const TrendingList = ({
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 lg:grid-cols-6  w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-0 lg:grid-cols-6  w-full">
             {titles?.slice(0, 18).map((content) => (
               <TrendingCard key={content.id} media={content} />
             ))}

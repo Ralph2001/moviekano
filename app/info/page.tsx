@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutPage = () => {
   return (
-    <div className="w-full min-h-screen  md:lg:pl-[6rem] bg-[#080e15]  p-6">
+    <div className="w-full min-h-screen  md:lg:pl-[6rem] pb-14 bg-[#080e15]   p-6">
       <div className="max-w-screen-lg mx-auto py-6 space-y-8">
         {/* Header Section */}
         <div className="space-y-4 border-b border-slate-700 pb-8">

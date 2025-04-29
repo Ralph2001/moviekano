@@ -70,20 +70,20 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
       </div>
 
       {/* Text Content */}
-      <div className="h-[3rem]   flex flex-col overflow-hidden">
+      <div className="h-auto p-1  flex flex-col overflow-hidden">
         <p
           title={movie.title}
-          className="text-md text-slate-100 font-medium truncate"
+          className="text-xs text-gray-400 font-medium truncate"
         >
           {movie.title}
         </p>
-        <div className="flex items-center gap-1 flex-row w-full">
+        {/* <div className="flex items-center gap-1 flex-row w-full">
           <p className="text-xs text-slate-400 font-medium">
             {movie.release_date
               ? format(new Date(movie.release_date), "yyyy")
               : "Unknown"}
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
