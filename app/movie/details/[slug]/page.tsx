@@ -141,18 +141,16 @@ export default async function MovieDetailPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="flex justify-center w-full h-screen md:pl-[4rem] md:p-4  no-scrollbar">
+    <div className="flex justify-center w-full h-screen  md:p-4  no-scrollbar">
 
-      <div className="max-w-screen-2xl max-h-[50rem] w-full h-full grid grid-cols-1 lg:grid-cols-[65%_35%] gap-2">
-      
-      
+      <div className="max-w-screen-2xl max-h-[50rem] w-full h-full grid grid-cols-1 lg:grid-cols-[65%_35%] gap-1">
         {/* Left Column */}
-        <div className="flex flex-col flex-1 gap-4 p-2">
+        <div className="flex flex-col flex-1  gap-2 p-2">
           <MoviePlayer movie={movie} />
         </div>
 
         {/* Right Column (Tabs) */}
-        <div className="overflow-auto bg-black/20 p-4 gap-2 rounded-2xl flex flex-col  mt-9 pt-12 md:pt-4  h-[calc(100vh-1rem)] lg:h-auto">
+        <div className="overflow-auto bg-black/20 p-4 gap-2 rounded-2xl flex flex-col pt-4  h-[calc(100vh-3rem)] lg:h-auto">
           <Tabs tabs={tabData} />
         </div>
       </div>

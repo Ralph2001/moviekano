@@ -23,10 +23,10 @@ export const TrendingList = ({
   return (
     <div className="container mx-auto md:lg:px-4 py-4">
       <div className="mb-10">
-        <h2 className="text-2xl font-semibold text-white flex flex-row gap-2 items-center">
+        <h2 className="text-2xl font-bold text-white flex flex-row gap-2 items-center">
           Trending Now <IoMdTrendingUp className="text-blue-500" />{" "}
         </h2>
-        <p className="text-gray-400 text-sm">Most watched titles this week</p>
+        <p className="text-gray-500 text-xs">Most watched titles this week</p>
       </div>
 
       <div className="relative w-full h-full md:lg:px-4">
@@ -37,7 +37,7 @@ export const TrendingList = ({
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-0 lg:grid-cols-6  w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 lg:grid-cols-6  w-full">
             {titles?.slice(0, 18).map((content) => (
               <TrendingCard key={content.id} media={content} />
             ))}

@@ -78,7 +78,7 @@ const Page = () => {
   }, [handleScroll]);
 
   return (
-    <main className="w-full min-h-screen h-full flex flex-col items-center  pb-10">
+    <main className="w-full min-h-screen h-full flex flex-col items-center   pb-14 md:pb-0">
       <div className="max-w-screen-2xl p-4 h-full md:lg:pl-[4rem] w-full flex flex-col justify-center">
         <section className="flex flex-col gap-2 mt-4">
           <form

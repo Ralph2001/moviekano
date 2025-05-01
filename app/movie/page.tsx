@@ -8,7 +8,7 @@ const page = () => {
   const popularMovies = usePopularMovies();
   const topRatedMovies = useTopRatedMovies();
   return (
-    <main className="w-full min-h-screen  h-full pb-10  flex flex-col items-center ">
+    <main className="w-full min-h-screen  h-full pb-14 md:pb-0   flex flex-col items-center ">
       <div className="max-w-screen-xl flex-col  p-4 h-full md:lg:pl-[4rem]   w-full flex  justify-center">
         <section className="flex flex-col gap-2 md:lg:px-10 mt-4">
           <div className="mb-2">
